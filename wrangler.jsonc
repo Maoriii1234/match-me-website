@@ -1,0 +1,9 @@
+{
+  "name": "match-me-website",
+  "compatibility_date": "2026-07-21",
+  "main": "worker.js",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS"
+  }
+}
