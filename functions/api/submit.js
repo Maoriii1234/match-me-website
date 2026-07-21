@@ -57,7 +57,7 @@ export async function onRequestPost(context) {
       emailPayload.attachments = [{ filename: photo_filename, content: photo_base64 }];
     }
 
-    const resendRes = await fetch("https://api.resend.com/emails", {
+    await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${env.RESEND_API_KEY}`,
@@ -65,10 +65,8 @@ export async function onRequestPost(context) {
       },
       body: JSON.stringify(emailPayload),
     });
-    const resendText = await resendRes.text();
 
-    // TEMPORARY debug fields - remove resend_ok/resend_detail once email is confirmed working
-    return json({ success: true, resend_ok: resendRes.ok, resend_status: resendRes.status, resend_detail: resendText.substring(0, 500) }, 200);
+    return json({ success: true }, 200);
   } catch (err) {
     return json({ error: err.message }, 500);
   }
